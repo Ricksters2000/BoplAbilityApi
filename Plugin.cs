@@ -34,8 +34,7 @@ namespace AbilityApi.Internal
         private void Awake()
         {
             Logger.LogInfo("Plugin AbilityApi is loaded!");
-
-            Harmony harmony = new Harmony("com.David_Loves_JellyCar_Worlds.AbilityApi");
+            Harmony harmony = new Harmony("com.Ricksters.AbilityApi");
             Logger.LogInfo("harmony created");
             harmony.PatchAll();
             Logger.LogInfo("AbilityApi Patch Complete!");

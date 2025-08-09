@@ -28,7 +28,7 @@ namespace Ability_Api
             Texture2D abilityTex = Api.LoadImageFromResources(namespaceName, abilityIconSpriteName);
             var iconSprite = Sprite.Create(abilityTex, new Rect(0f, 0f, abilityTex.width, abilityTex.height), new Vector2(0.5f, 0.5f));
             NamedSprite ability = new NamedSprite(abilityName, iconSprite, abilityPrefab.gameObject, true);
-            Api.RegisterNamedSprites(ability, true);
+            Api.RegisterNamedSprites(ability);
         }
     }
 }
