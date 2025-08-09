@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using System.IO;
-using System.Drawing;
-using UnityEngine.SocialPlatforms;
-using AbilityApi.Internal;
 using Ability_Api;
 using System.Reflection;
 using BoplFixedMath;
@@ -30,11 +24,7 @@ namespace AbilityApi
 
         // Holds custom textures for abilities.
         public static List<Texture2D> CustomAbilityTexstures = new();
-        public static Dictionary<NamedSprite, List<NamedSprite>> CustomAbilitySpritesWithBackrounds = new();
         public static Dictionary<string, NamedSprite> NamedSpritesDict = new();
-        //the correct way to create this
-        public static NamedSpriteList CustomAbilitySpritesWithBackroundList = ScriptableObject.CreateInstance<NamedSpriteList>();
-        public static NamedSpriteList CustomAbilitySpritesWithoutBackroundList = ScriptableObject.CreateInstance<NamedSpriteList>();
         public static List<NamedSprite> Sprites = new();
         // For some reason ability prefabs are being destroyed even with DontDestroyOnLoad() so this is used to create those destroyed prefabs
         public static List<ReCreateGameObject<MonoUpdatable>> ReCreateGameObjects = new();
@@ -161,23 +151,8 @@ namespace AbilityApi
         /// if the assosated gameobjects name isnt the same as the ability name it will be renamed. dont use the same assosated gameobject for multiple abilitys.
         /// </summary>
         /// <returns></returns>
-        public static void RegisterNamedSprites(NamedSprite namedSprite, bool IsOffensiveAbility)
+        public static void RegisterNamedSprites(NamedSprite namedSprite)
         {
-            if (CustomAbilitySpritesWithBackroundList.sprites == null)
-            {
-                CustomAbilitySpritesWithBackroundList.sprites = new();
-            }
-            if (CustomAbilitySpritesWithoutBackroundList.sprites == null)
-            {
-                CustomAbilitySpritesWithoutBackroundList.sprites = new();
-            }
-            // this just instantiates a NamedSpriteList if it already has the namedSprite, looks redundant as its already done a few lines up
-            if (Sprites.Any(sprite => sprite.name == namedSprite.name))
-
-                if (CustomAbilitySpritesWithBackroundList.sprites == null)
-                {
-                    CustomAbilitySpritesWithBackroundList.sprites = new();
-                }
             if (NamedSpritesDict.ContainsKey(namedSprite.name))
             {
                 throw new Exception($"Error: Ability with the name {namedSprite.name} already exists, not creating ability!");
@@ -187,21 +162,7 @@ namespace AbilityApi
             namedSprite.sprite.name = namedSprite.name;
             CustomAbilityTexstures.Add(namedSprite.sprite.texture); // Add ability texture to custom textures list.
 
-            // Create overlayed sprites with each background.
-            List<NamedSprite> AbilitysWithBackrounds = new List<NamedSprite>();
-            foreach (var backround in Plugin.BackroundSprites)
-            {
-                var TextureWithBackround = Api.OverlayBackround(namedSprite.sprite.texture, backround);
-                var SpriteWithBackround = Sprite.Create(TextureWithBackround, new Rect(0f, 0f, TextureWithBackround.width, TextureWithBackround.height), new Vector2(0.5f, 0.5f));
-                var NamedSpriteWithBackround = new NamedSprite(namedSprite.name, SpriteWithBackround, namedSprite.associatedGameObject, IsOffensiveAbility);
-                AbilitysWithBackrounds.Add(NamedSpriteWithBackround);
-                CustomAbilitySpritesWithBackroundList.sprites.Add(NamedSpriteWithBackround);
-                //CustomAbilitySpritesWithoutBackroundList.sprites.Add(namedSprite);
-            }
-
-            CustomAbilitySpritesWithoutBackroundList.sprites.Add(namedSprite);
             // Add the main sprite and its background variations to relevant lists.
-            CustomAbilitySpritesWithBackrounds.Add(namedSprite, AbilitysWithBackrounds);
             NamedSpritesDict.Add(namedSprite.name, namedSprite);
             Sprites.Add(namedSprite);
         }
