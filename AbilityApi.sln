@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbilityApi", "AbilityApi.csproj", "{B9CAD3E9-0EAE-4028-BE62-A8C770B952F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9CAD3E9-0EAE-4028-BE62-A8C770B952F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9CAD3E9-0EAE-4028-BE62-A8C770B952F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9CAD3E9-0EAE-4028-BE62-A8C770B952F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9CAD3E9-0EAE-4028-BE62-A8C770B952F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {853496C5-906D-4739-9CEE-DDEF1D60749A}
+	EndGlobalSection
+EndGlobal
